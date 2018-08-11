@@ -1,1 +1,1 @@
-# back_for_vue
+# Backend for Vue.js application
