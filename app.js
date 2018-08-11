@@ -39,7 +39,7 @@ app.set('views', __dirname + '/passport-vkontakte/examples/login/views');
 app.set('view engine', 'ejs');
 app.use(parser());
 app.use(esession({
-  secret: '123',
+  secret: 'secret',
   resave: false,
   saveUninitialized: true,
   cookie: { 
@@ -116,12 +116,10 @@ app.get('/try',(req,res)=>{
 
 
 app.post('/api/subjects',(req,res)=>{
-  console.log('SUBBBBBBJJJJ')
   if(req.body.user_info===undefined){
     console.log('None')
   }
   else{
-    console.log(req.body.user_info)
     let subjadd = mongo.SubjectAdd(req.body.time, req.body.user_agent, req.body.user_info, req.body.time_total)
     subjadd
           .then((data)=>{
@@ -138,19 +136,17 @@ app.post('/session',(req,res)=>{
   res.header("Access-Control-Allow-Origin", '*')
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   count++;
-  console.log(count)
   res.send(JSON.stringify({id:count}));
 });
 
 app.post('/session/:id',(req,res)=>{
-  console.log('ISSS',req.params.id)
   res.send(JSON.stringify({data:"OK"}))
 
   let sess = mongo.SessionAdd(req.body.game,req.body.user_info,req.body.data,req.body.start, req.body.stop)
       sess 
          .then((data)=>{
            if(data===1){
-             console.log('NICE')
+             console.log('nice')
            }
 })
 });
